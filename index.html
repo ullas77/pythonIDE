@@ -1,12 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CodePaddle Playground</title>
-</head>
-<body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
-</body>
-</html>
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth-compat.js"></script>
+
+<script>
+  const firebaseConfig = {
+    apiKey: "AIzaSyCbPaFhypgmwxG7k5WosANmQTeB0QlYEzc",
+    authDomain: "codepaddle-f07c0.firebaseapp.com",
+    projectId: "codepaddle-f07c0",
+    // other config...
+  };
+  firebase.initializeApp(firebaseConfig);
+
+  function login() {
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then((user) => {
+        alert("Logged in!");
+        // redirect or enable editor
+      })
+      .catch((error) => {
+        alert("Login Failed: " + error.message);
+      });
+  }
+</script>
+
+<!-- Add login form somewhere -->
+<input id="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password">
+<button onclick="login()">Login</button>
